@@ -22,7 +22,7 @@ jobs:
       run: docker login -u $DOCKER_USER -p $DOCKER_TOKEN
 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag dhass421/create-react-app:$(date +%s)
+      run: docker build . --file Dockerfile --tag dhass421/create-react-app:latest
 
     - name: Push to DockerHub
-      run: docker push dhass421/create-react-app:$(date +%s)
+      run: docker push dhass421/create-react-app:latest
