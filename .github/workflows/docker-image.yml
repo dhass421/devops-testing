@@ -12,17 +12,19 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      DOCKER_USER: ${{ secrets.DOCKER_USER }}
+
     steps:
     - uses: actions/checkout@v2
 
     - name: Log into DockerHub
       env:
-        DOCKER_USER: ${{ secrets.DOCKER_USER }}
         DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
       run: docker login -u $DOCKER_USER -p $DOCKER_TOKEN
 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag dhass421/create-react-app:latest
+      run: docker build . --file Dockerfile --tag $DOCKER_USER/create-react-app:latest
 
     - name: Push to DockerHub
-      run: docker push dhass421/create-react-app:latest
+      run: docker push $DOCKER_USER/create-react-app:latest
